@@ -1,0 +1,40 @@
+---
+title: "First Draft"
+author: "Ahern Nelson, Christopher Campbell"
+date: "June 30, 2017"
+output: html_document
+runtime: shiny
+---
+
+
+```{r setup, include=FALSE, echo=FALSE}
+source("setup.R")
+```
+
+## Shiny App
+
+The graphs below give a sense of how well students performed on each test (average
+test scores). The graphs also show the proportion of students per test who scored
+higher than a 2.5. The overall graph of the high achieving students shows the 
+proportion of students in the sample who scored higher than a 2.5 on one test or
+the other.
+
+```{r Scores, echo=FALSE}
+shinyAppFile("ScoresApp.R")
+```
+
+## Error Codes
+
+This graph shows the frequency of error codes per course as well as per test criteria.
+
+* Add Legend/Legend Tab
+* Y-axis label?
+
+```{r tabsets, echo=FALSE}
+shinyAppFile("errorCodesApp.R")
+```
+
+
+
+
+
