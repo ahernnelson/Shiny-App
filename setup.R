@@ -105,26 +105,36 @@ meansmedsdf <- data.frame(c1mean, c1median,
 ###### Percent and frequency abovee 2.5 #############################
 # here we pipe the data rather than using tapply/do.call
 # since we want the high scores *per test* and overall
+
 temp <- toydata %>% group_by(Course) %>% summarize(n = n())
-highscores.5 <- toydata %>% group_by(Course) %>%
-  mutate(numberStudentsByCourse = n()) %>%
+
+highscores1 <- toydata %>% group_by(Course) %>%
+  mutate(numberStudents1 = n()) %>%
   filter(score1>2.5) %>% 
   mutate(freq2.5Test1 = n(),
-         perc2.5Test1 = freq2.5Test1/numberStudentsByCourse.5)
-highscores1 <- highscores.5[,c("Course","freq2.5Test1","perc2.5Test1")]
+         perc2.5Test1 = freq2.5Test1/numberStudents1) %>%
+  summarize(freq2.5Test1 = first(freq2.5Test1),
+            perc2.5Test1 = first(perc2.5Test1),
+            numberStudents1 = first(numberStudents1))
+highscores1.5 <- highscores1[,c("Course","freq2.5Test1","perc2.5Test1",
+                                "numberStudents1")]
 
-highscores1.5 <- toydata %>% group_by(Course) %>%
-  mutate(numberStudentsByCourse = n()) %>%
+highscores2 <- toydata %>% group_by(Course) %>%
+  mutate(numberStudents2 = n()) %>%
   filter(score2>2.5) %>% 
   mutate(freq2.5Test2 = n(),
-         perc2.5Test2 = freq2.5Test2/numberStudentsByCourse1.5)
+         perc2.5Test2 = freq2.5Test2/numberStudents2) %>%
+  summarize(freq2.5Test2 = first(freq2.5Test2),
+            perc2.5Test2 = first(perc2.5Test2),
+            numberStudents2 = first(numberStudents2))
 
-highscores2 <- highscores1.5[,c("Course","freq2.5Test1","perc2.5Test1")]
+highscores2.5 <- highscores2[,c("Course","freq2.5Test2","perc2.5Test2",
+                                "numberStudents2")]
 
-highscoresnew <- cbind(highscores.5[,c(8,9)], highscores1.5[,c(8,9)]) %>%
+highscoresnew <- cbind(highscores1[,c(2,3,4)], highscores2[,c(2,3,4)]) %>%
   mutate(highScoresAllFreq = freq2.5Test1+freq2.5Test2,
          highScoresAllPerc = highScoresAllFreq/
-           (numberStudentsByCourse.5+numberStudentsByCourse1.5))
+           (numberStudents1+numberStudents2))
 
 highscores <- tapply(c(toydata$"score1", toydata$"score2"), 
                      INDEX = rep(toydata$Course, 2), 
