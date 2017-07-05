@@ -2,7 +2,7 @@ library(reshape2)
 library(tidyr)
 library(dplyr)
 ###### Read in and mutuate data #####################################
-toydata <- read.csv("toyAssessmentData.csv",
+toydata <- read.csv("RawData/toyAssessmentData.csv",
                     header = TRUE, 
                     row.names = 1, 
                     stringsAsFactors = FALSE)

@@ -28,7 +28,9 @@ server <- function(input, output) {
   # user specified
   data1 <- reactive({
     y_axis <- switch(input$y_axis,
-                     "Scores above 2.5" = results[,c(11,13,15)],
+                     "Scores above 2.5" = results[,c("perc2.5Test1",
+                                                     "perc2.5Test2",
+                                                     "highScoresAllPerc")],
                       "Average Scores" = results[, c(2,4,6)])
   })
   # create gg titles and axis labels
@@ -48,7 +50,7 @@ server <- function(input, output) {
   # Summary of data per table
   tableData <- reactive({
   tabledResults <- switch(input$y_axis,
-                          "Scores above 2.5" = results[, c(1, 10:15, 17)],
+                          "Scores above 2.5" = results[, c(1, 10,11,13,14,15,17,18)],
                           "Average Scores" = results[, 1:7])
   })
   
