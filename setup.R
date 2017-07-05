@@ -116,8 +116,7 @@ highscores1 <- toydata %>% group_by(Course) %>%
   summarize(freq2.5Test1 = first(freq2.5Test1),
             perc2.5Test1 = first(perc2.5Test1),
             numberStudents1 = first(numberStudents1))
-highscores1.5 <- highscores1[,c("Course","freq2.5Test1","perc2.5Test1",
-                                "numberStudents1")]
+
 
 highscores2 <- toydata %>% group_by(Course) %>%
   mutate(numberStudents2 = n()) %>%
@@ -128,8 +127,6 @@ highscores2 <- toydata %>% group_by(Course) %>%
             perc2.5Test2 = first(perc2.5Test2),
             numberStudents2 = first(numberStudents2))
 
-highscores2.5 <- highscores2[,c("Course","freq2.5Test2","perc2.5Test2",
-                                "numberStudents2")]
 
 highscoresnew <- cbind(highscores1[,c(2,3,4)], highscores2[,c(2,3,4)]) %>%
   mutate(highScoresAllFreq = freq2.5Test1+freq2.5Test2,
