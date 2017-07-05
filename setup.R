@@ -72,7 +72,7 @@ testAll <- byTest(toydata, 0)
 
 courseresults = list()
 for(i in 1:7) {
-  courseresults[[i]] = list(testAll[[i]], test1[[i]], test2[[i]])
+  courseresults[[i]] = list(Overall = testAll[[i]], test1 = test1[[i]], test2 = test2[[i]])
 }
 
 names(courseresults) <- coursenames
