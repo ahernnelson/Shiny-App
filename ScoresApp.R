@@ -48,9 +48,14 @@ server <- function(input, output) {
   
   })
   # Summary of data per table
+  frontFacingColumns <- c("course", "freqAbove2.5", "percAbove2.5",
+                          "freq2.5Test1", "perc2.5Test1", "freq2.5Test2",
+                          "perc2.5Test2",
+                          "highScoresAllFreq","highScoresAllPerc")
+  
   tableData <- reactive({
   tabledResults <- switch(input$y_axis,
-                          "Scores above 2.5" = results[, c(1, 10,11,13,14,15,17,18)],
+                          "Scores above 2.5" = results[, frontFacingColumns],
                           "Average Scores" = results[, 1:7])
   })
   
