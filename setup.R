@@ -56,11 +56,16 @@ byTest <- function(data, testNum) {
     ## This could be problematic 
     ## e.g count of any error coulbe > studcount because of 2 tests
     percs <- counts/testcount
+    parentcode <- c()
+    for (code in names(counts)) {
+      parentcode <- c(parentcode, strsplit(code, split = "-")[[1]][1])
+    }
     tograph <- data.frame(codes = names(counts),
                           counts = as.vector(counts), 
                           percs = as.vector(percs), 
                           studcount = studcount,
-                          testcount = testcount)
+                          testcount = testcount,
+                         parentcode = parentcode)
     coursecodes[[i]] <- tograph
   }
   names(coursecodes) <- coursenames
