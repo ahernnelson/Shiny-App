@@ -40,13 +40,13 @@ server <-  function(input, output) {
   # this expression
   data <- reactive({
    course <- switch(input$course,
-                    calc1 = courseresults[[1]],
-                    calc2 = courseresults[[2]],
-                    calc3 = courseresults[[3]],
-                    numAnlys = courseresults[[4]],
-                    histMath = courseresults[[5]],
-                    realAnlys = courseresults[[6]],
-                    probThry = courseresults[[7]])
+                    calc1 = courseresults$Calc1,
+                    calc2 = courseresults$Calc2,
+                    calc3 = courseresults$Calc3,
+                    numAnlys = courseresults$NumAnalysis,
+                    histMath = courseresults$HistoryMath,
+                    realAnlys = courseresults$RealAnalysis,
+                    probThry = courseresults$ProbTheory)
   })
   # Reactive varibable for graph aesthetics. Right now only width(Subject to change)
   visuals <- reactive({
