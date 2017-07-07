@@ -69,12 +69,18 @@ byTest <- function(data, testNum) {
   names(coursecodes) <- coursenames
   return(coursecodes)
 }
-test1 <- byTest(toydata[-c(6, 7)], 1)
-test2 <- byTest(toydata[-c(4,5)], 2)
+test1Data <- data.frame(cbind(Course = toydata$Course, 
+                              score1 = toydata$score1, 
+                              errorcode1 =toydata$errorcode1))
+test2Data <- data.frame(cbind(Course = toydata$Course, 
+                              score2 = toydata$score2, 
+                              errorcode2 = toydata$errorcode2))
+test1 <- byTest(test1Data, 1)
+test2 <- byTest(test2Data, 2)
 testAll <- byTest(toydata, 0)
 
 courseresults = list()
-for(i in 1:7) {
+for(i in 1:length(coursenames)) {
   courseresults[[i]] = list(Overall = testAll[[i]], test1 = test1[[i]], test2 = test2[[i]])
 }
 
@@ -82,11 +88,11 @@ names(courseresults) <- coursenames
 
 names(testAll) <- coursenames
 allcodes <- melt(testAll, 
-                 id.vars = c("codes", "counts", "percs", "studcount", "testcount"))
+                 id.vars = c("codes", "counts", "percs", "testcount", "parentcode"))
 names(allcodes)[6] <- "course"
 ## creating labels for graph to show number of students per course
 allcodes$label <- paste(allcodes$course, 
-                        paste(allcodes$studcount, "students,", allcodes$testcount, "tested"), 
+                        paste(allcodes$testcount, "students tested"), 
                         sep = " - ")
 
 ###### Means and Median per criteria##################################
