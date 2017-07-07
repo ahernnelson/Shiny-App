@@ -78,19 +78,11 @@ server <-  function(input, output) {
   # all expressions are called in the sequence implied by the
   # dependency graph
   givePlotly <- function(data, criteria){
-    x <- data[, 1]
-    y <- data[, 3]
-    
-    plot_ly(data, x = ~x, y = ~y, type = 'bar', 
-            hovertext = paste("Count", data[,2], sep = ": "),
-            marker = list(color = 'rgb(158,202,225)',
-                          line = list(color = 'rgb(8,48,107)',
-                                      width = visuals()[[1]]))) %>%
-      layout(title = paste(titles(), criteria, sep = ": "),
-             xaxis = list(title = "Error Codes"),
-             yaxis = list(title = "Percent (# Occurrences / # Students)", tickformat = "%", 
-                          range = c(0,1))) %>% 
-      config(displayModeBar = F) 
+    p <- ggplot(data, aes(x=parentcode,y=percs)) + 
+          geom_bar(stat="identity",width = visuals()[[1]], position="dodge", aes(fill=codes),
+               color="black") + labs(y = "Percent (# Occurrences / # Testsed)", x = "Error Codes") +
+               scale_y_continuous(labels = scales::percent, limits = c(0, 1)) + ggtitle(label = paste(titles(), criteria, sep = ": "))
+    ggplotly(p, height = 450, width = 580)
   }
   output$plot1 <- renderPlotly({
     givePlotly(data()[[1]], "Overall")
