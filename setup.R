@@ -18,7 +18,7 @@ codesToChange <- c("(ep)", "(ldm)", "(ade)", "(me)", "(se)")
 codeChanges <- cbind(codesToKeep,codesToChange)
 
 #Change all error codes
-for (i in 1:5){
+for (i in 1:length(codesToChange)){
   toydata$errorcode1 <- 
     gsub(codesToChange[i],codesToKeep[i],
          toydata$errorcode1)
@@ -38,7 +38,7 @@ byTest <- function(data, testNum) {
   
   ## splitting codes by semicolon, ###########
   ## counting each & finding percentage ######
-  for(i in 1:7){
+  for(i in 1:length(coursenames)){
     whichcourse <- data$Course==coursenames[i]
     if(testNum == 0) {
       code1 <- unlist(allcode1s[whichcourse])
@@ -51,8 +51,6 @@ byTest <- function(data, testNum) {
       counts <- table(c(codes))
       testcount <- nrow(data[whichcourse, ])
     }
-    uncourse <- unique(data[whichcourse, 1:3])
-    studcount <- sum(uncourse$numberstudents)
     ## This could be problematic 
     ## e.g count of any error coulbe > studcount because of 2 tests
     percs <- counts/testcount
@@ -60,12 +58,12 @@ byTest <- function(data, testNum) {
     for (code in names(counts)) {
       parentcode <- c(parentcode, strsplit(code, split = "-")[[1]][1])
     }
+    
     tograph <- data.frame(codes = names(counts),
                           counts = as.vector(counts), 
                           percs = as.vector(percs), 
-                          studcount = studcount,
                           testcount = testcount,
-                         parentcode = parentcode)
+                          parentcode = parentcode)
     coursecodes[[i]] <- tograph
   }
   names(coursecodes) <- coursenames
