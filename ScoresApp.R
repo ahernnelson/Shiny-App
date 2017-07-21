@@ -31,7 +31,7 @@ server <- function(input, output) {
                      "Scores above 2.5" = results[,c("perc2.5Test1",
                                                      "perc2.5Test2",
                                                      "highScoresAllPerc")],
-                      "Average Scores" = results[, c(2,4,6)])
+                      "Average Scores" = results[, c("c1mean","c2mean","allmean")])
   })
   # create gg titles and axis labels
   titles <- reactive({
@@ -74,6 +74,14 @@ server <- function(input, output) {
              yaxis = list(title = titles()[2], tickformat = scaleByLim()[[1]], 
                           range = scaleByLim()[[2]])) %>% 
       config(displayModeBar = F) 
+  }
+  givePlotly <- function(data, criteria){
+    p <- ggplot(data, aes(x=parentcode,y=percs)) + 
+          geom_bar(stat="identity", aes(fill=course),
+               color="black") + labs(y = "Percent (# Occurrences / # Students)", x = "Error Codes") +
+               scale_y_continuous(labels = scaleByLim()[[1]], limits = labels = scaleByLim()[[2]] + 
+                                  ggtitle(label = paste(titles(), criteria, sep = ": "))
+    ggplotly(p, height = 450, width = 580)
   }
   output$plot <- renderPlotly({
     givePlotly(data1()[, 3], "Overall")
