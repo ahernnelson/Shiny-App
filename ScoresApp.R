@@ -52,11 +52,12 @@ server <- function(input, output) {
                           "freq2.5Test1", "perc2.5Test1", "freq2.5Test2",
                           "perc2.5Test2",
                           "highScoresAllFreq","highScoresAllPerc")
+  averageColumns <- c("course", "c1mean", "c1median", "c2mean", "c2median", "allmean", "allmedian")
   
   tableData <- reactive({
   tabledResults <- switch(input$y_axis,
                           "Scores above 2.5" = results[, frontFacingColumns],
-                          "Average Scores" = results[, 1:7])
+                          "Average Scores" = results[, averageColumns])
   })
   
   #### Ploting Function and rendering ###############################
