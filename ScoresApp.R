@@ -75,14 +75,7 @@ server <- function(input, output) {
                           range = scaleByLim()[[2]])) %>% 
       config(displayModeBar = F) 
   }
-  givePlotly <- function(data, criteria){
-    p <- ggplot(data, aes(x=parentcode,y=percs)) + 
-          geom_bar(stat="identity", aes(fill=course),
-               color="black") + labs(y = "Percent (# Occurrences / # Students)", x = "Error Codes") +
-               scale_y_continuous(labels = scaleByLim()[[1]], limits = labels = scaleByLim()[[2]] + 
-                                  ggtitle(label = paste(titles(), criteria, sep = ": "))
-    ggplotly(p, height = 450, width = 580)
-  }
+
   output$plot <- renderPlotly({
     givePlotly(data1()[, 3], "Overall")
   })
