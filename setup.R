@@ -58,12 +58,20 @@ byTest <- function(data, testNum) {
     for (code in names(counts)) {
       parentcode <- c(parentcode, strsplit(code, split = "-")[[1]][1])
     }
-    
-    tograph <- data.frame(codes = names(counts),
-                          counts = as.vector(counts), 
-                          percs = as.vector(percs), 
-                          testcount = testcount,
-                          parentcode = parentcode)
+    if (sum(counts) > 0){ 
+      tograph <- data.frame(codes = names(counts),
+                            counts = as.vector(counts), 
+                            percs = as.vector(percs), 
+                            testcount = testcount,
+                            parentcode = parentcode)
+    }
+    else {
+      tograph <- data.frame(codes = "NULL",
+                            counts = 0,
+                            percs = 0,
+                            testcount = 1,
+                            parentcode = "NULL")
+    }
     coursecodes[[i]] <- tograph
   }
   names(coursecodes) <- coursenames
