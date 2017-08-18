@@ -1,3 +1,8 @@
+library(reshape2)
+library(tidyr)
+library(dplyr)
+
+
 library(shiny)
 library(plotly)
 # devtools::install_github("ropensci/plotly")
@@ -10,6 +15,9 @@ ui <- fluidPage(
   # br() element to introduce extra vertical spacing
   sidebarLayout(
    sidebarPanel(
+     fileInput("new_file", "Input CSV File"),
+     actionButton("Clean","Me First"),
+     actionButton("Analyze","Me Second"),
      radioButtons("course", "Choose course:",
                   c("Calculus 1" = "calc1",
                     "Calculus 2" = "calc2",
@@ -33,11 +41,28 @@ ui <- fluidPage(
 
 ###### Server #######################################################
 server <-  function(input, output) {
+  
+  saveData <- function(inptable) ({
+    new_data <- inptable
+    new_data2 <- read.csv(new_data$datapath)
+    write.csv(new_data2, "~/new_file.csv")
+  })
+  
+  observeEvent(input$Clean, {
+    saveData(input$new_file)} )
+  
+  observeEvent(input$Analyze, {
+    source("setup.r")
+  })
+  
   #### Reactive Data ################################################
   # Reactive expression to generate the requested distribution.
   # This is called whenever the inputs change. The output
   # functions defined below then all use the value computed from
   # this expression
+  
+  
+  
   data <- reactive({
    course <- switch(input$course,
                     calc1 = courseresults$Calc1,
