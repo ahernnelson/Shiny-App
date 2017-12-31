@@ -5,8 +5,8 @@ This Shiny App takes in a dataset of exam scores and returns graphical test scor
 
 MSU Denver maintains academic standards and ensures adequete mathematical preparation by requiring its students to pass "gateway" examinations in order to receive a passing grade in any given course. Some example gateway subjects are:
 
-Calc I: Basic Differentiation (Power Rule, Product Rule, Quotient Rule, Chain Rule, Trig)
-Real Analysis: Basic Epsilon-Delta proofs for Limits, Continuity, Differentiation.
+1. Calc I: Basic Differentiation (Power Rule, Product Rule, Quotient Rule, Chain Rule, Trig)
+2. Real Analysis: Basic Epsilon-Delta proofs for Limits, Continuity, Differentiation.
 
 MSU Denver must prepare reports on the success of these measures and so tracks the types of errors made by each class.
 
