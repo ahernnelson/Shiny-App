@@ -3,7 +3,7 @@ This Shiny App takes in a dataset of exam scores and returns graphical test scor
 
 ## Purpose
 
-MSU Denver maintains academic standards and ensures adequete mathematical preparation by requiring its students to pass "gateway" examinations in order to receive a passing grade in any given course. Some example gateway subjects are:
+MSU Denver maintains academic standards and ensures adequate mathematical preparation by requiring its students to pass "gateway" examinations in order to receive a passing grade in any given course. Some example gateway subjects are:
 
 1. Calc I: Basic Differentiation (Power Rule, Product Rule, Quotient Rule, Chain Rule, Trig)
 2. Real Analysis: Basic Epsilon-Delta proofs for Limits, Continuity, Differentiation.
